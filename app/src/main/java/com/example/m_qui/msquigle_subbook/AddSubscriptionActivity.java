@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -30,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import static android.provider.Telephony.Mms.Part.FILENAME;
-
 public class AddSubscriptionActivity extends AppCompatActivity {
 
     private static final String FILENAME = "subs.sav";
@@ -40,9 +36,7 @@ public class AddSubscriptionActivity extends AppCompatActivity {
     private EditText dateText;
     private EditText chargeText;
     private EditText commentText;
-    private DatePicker datePicker;
     private ArrayList<Subscription> subList;
-    private ArrayAdapter<Subscription> adapter;
     private int focus;
     private Subscription focusSub;
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -56,18 +50,18 @@ public class AddSubscriptionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         focus = Integer.valueOf(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
 
-        nameText = (EditText) findViewById(R.id.entry_name);
-        dateText = (EditText) findViewById(R.id.entry_date);
-        chargeText = (EditText) findViewById(R.id.entry_charge);
-        commentText = (EditText) findViewById(R.id.entry_comment);
+        nameText = findViewById(R.id.entry_name);
+        dateText = findViewById(R.id.entry_date);
+        chargeText = findViewById(R.id.entry_charge);
+        commentText = findViewById(R.id.entry_comment);
 
-        Button saveButton = (Button) findViewById(R.id.save);
+        Button saveButton = findViewById(R.id.save);
 
         if(!(focus == -1)) {
             focusSub = subList.get(focus);
             nameText.setText(focusSub.getName());
             dateText.setText(format.format(focusSub.getDate()));
-            chargeText.setText(String.valueOf(focusSub.getCharge()));
+            chargeText.setText(String.format(Locale.CANADA,"%.2f", focusSub.getCharge()));
             commentText.setText(focusSub.getComment());
         }
 
@@ -102,7 +96,7 @@ public class AddSubscriptionActivity extends AppCompatActivity {
 
                 String chargeString = chargeText.getText().toString();
                 double charge = 0;
-                if((!chargeString.isEmpty()) && (chargeString.indexOf(".") + 3 >= chargeString.length())) {
+                if((!chargeString.isEmpty()) && ((!chargeString.contains(".")) || (chargeString.indexOf(".") + 3 >= chargeString.length()))) {
                     charge = Double.parseDouble(chargeString);
                 }
                 else {
@@ -136,7 +130,7 @@ public class AddSubscriptionActivity extends AppCompatActivity {
             }
         });
 
-        Button delButton = (Button) findViewById(R.id.del_button);
+        Button delButton = findViewById(R.id.del_button);
 
         delButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +178,6 @@ public class AddSubscriptionActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException();
         }
-
     }
 
     private void saveInFile() {

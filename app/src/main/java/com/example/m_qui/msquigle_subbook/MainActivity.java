@@ -23,10 +23,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        subListView = (ListView) findViewById(R.id.subs);
-        costView = (TextView) findViewById(R.id.cost_summary);
+        subListView = findViewById(R.id.subs);
+        costView = findViewById(R.id.cost_summary);
 
         subListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             total = total + subList.get(i).getCharge();
         }
 
-        String costDisplay = "Total Monthly Cost: $" + String.format("%.2f", total);
+        String costDisplay = "Total Monthly Cost: $" + String.format(Locale.CANADA,"%.2f", total);
         costView.setText(costDisplay);
 
         adapter = new ArrayAdapter<Subscription>(this, R.layout.sub_layout, subList);

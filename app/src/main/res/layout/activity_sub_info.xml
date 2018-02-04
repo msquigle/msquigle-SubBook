@@ -4,78 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.m_qui.msquigle_subbook.AddSubscriptionActivity">
+    tools:context="com.example.m_qui.msquigle_subbook.SubInfoActivity">
 
     <Button
-        android:id="@+id/save"
-        android:layout_width="60dp"
+        android:id="@+id/del_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/button_save"
+        android:background="?android:attr/colorError"
+        android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/entry_name"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/name_info"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/name_hint"
-        android:maxLength="20"
-        android:inputType="textPersonName"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/entry_charge"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
+    <TextView
+        android:id="@+id/date_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/charge_hint"
-        android:inputType="numberDecimal"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_date" />
+        app:layout_constraintTop_toBottomOf="@+id/name_info" />
 
-    <EditText
-        android:id="@+id/entry_comment"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
+    <TextView
+        android:id="@+id/charge_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/comment_hint"
-        android:maxLength="30"
-        android:inputType="textPersonName"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_charge" />
+        app:layout_constraintTop_toBottomOf="@+id/date_info" />
 
-    <EditText
-        android:id="@+id/entry_date"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
+    <TextView
+        android:id="@+id/comment_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/date_hint"
-        android:inputType="date"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_name" />
-
+        app:layout_constraintTop_toBottomOf="@+id/charge_info" />
 </android.support.constraint.ConstraintLayout>

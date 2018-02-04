@@ -6,9 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -22,74 +21,53 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class SubInfoActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MESSAGE = "com.example.m_qui.msquigle_subbook.MESSAGE";
     private static final String FILENAME = "subs.sav";
-    private ListView subListView;
-    private TextView costView;
 
     private ArrayList<Subscription> subList;
-    private ArrayAdapter<Subscription> adapter;
+    private Subscription focusSub;
+    private TextView nameText;
+    private TextView dateText;
+    private TextView chargeText;
+    private TextView commentText;
+    private int focus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sub_info);
+        nameText = (TextView) findViewById(R.id.name_info);
+        dateText = (TextView) findViewById(R.id.date_info);
+        chargeText = (TextView) findViewById(R.id.charge_info);
+        commentText = (TextView) findViewById(R.id.comment_info);
 
-        subListView = (ListView) findViewById(R.id.subs);
-        costView = (TextView) findViewById(R.id.cost_summary);
+        Button delButton = (Button) findViewById(R.id.del_button);
 
-        subListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Intent intent = getIntent();
+        focus = Integer.valueOf(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
+        loadFromFile();
+        focusSub = subList.get(focus);
+        nameText.setText(focusSub.getName());
+        dateText.setText(focusSub.getDate().toString());
+        chargeText.setText(String.valueOf(focusSub.getCharge()));
+        commentText.setText(focusSub.getComment());
+
+        delButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onClick(View view) {
 
-                Intent intent = new Intent(getBaseContext(), SubInfoActivity.class);
-                String sending = String.valueOf(i);
-                intent.putExtra(EXTRA_MESSAGE, sending);
+                subList.remove(focus);
+                saveInFile();
+
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
 
-    }
-
-    public void onStart() {
-
-        super.onStart();
-
-        loadFromFile();
-        double total = 0;
-        for(int i = 0; i < subList.size();i++) {
-            total = total + subList.get(i).getCharge();
-        }
-
-        String costDisplay = "Total Monthly Cost: $" + String.format("%.2f", total);
-        costView.setText(costDisplay);
-
-        adapter = new ArrayAdapter<Subscription>(this, R.layout.sub_layout, subList);
-
-        subListView.setAdapter(adapter);
-
-
-    }
-
-    public void onResume() {
-        super.onResume();
-
-        adapter.notifyDataSetChanged();
-
-
-    }
-
-    public void gotoAddActivity(View view) {
-
-        Intent intent = new Intent(this, AddSubscriptionActivity.class);
-        startActivity(intent);
 
     }
 

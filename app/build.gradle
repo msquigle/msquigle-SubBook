@@ -26,3 +26,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.8.0'
+}
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}

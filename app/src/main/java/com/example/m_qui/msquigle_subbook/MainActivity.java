@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,10 +50,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getBaseContext(), SubInfoActivity.class);
-                String sending = String.valueOf(i);
-                intent.putExtra(EXTRA_MESSAGE, sending);
-                startActivity(intent);
+                gotoAddActivity(view, i);
+            }
+        });
+
+        Button addButton = (Button) findViewById(R.id.add);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoAddActivity(view, -1);
             }
         });
 
@@ -86,9 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void gotoAddActivity(View view) {
+    public void gotoAddActivity(View view, int i) {
 
         Intent intent = new Intent(this, AddSubscriptionActivity.class);
+        String sending = String.valueOf(i);
+        intent.putExtra(EXTRA_MESSAGE, sending);
         startActivity(intent);
 
     }

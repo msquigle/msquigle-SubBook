@@ -43,12 +43,18 @@ public class AddSubscriptionActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private ArrayList<Subscription> subList;
     private ArrayAdapter<Subscription> adapter;
+    private int focus;
+    private Subscription focusSub;
+    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subscription);
         loadFromFile();
+
+        Intent intent = getIntent();
+        focus = Integer.valueOf(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
 
         nameText = (EditText) findViewById(R.id.entry_name);
         dateText = (EditText) findViewById(R.id.entry_date);
@@ -57,42 +63,106 @@ public class AddSubscriptionActivity extends AppCompatActivity {
 
         Button saveButton = (Button) findViewById(R.id.save);
 
+        if(!(focus == -1)) {
+            focusSub = subList.get(focus);
+            nameText.setText(focusSub.getName());
+            dateText.setText(format.format(focusSub.getDate()));
+            chargeText.setText(String.valueOf(focusSub.getCharge()));
+            commentText.setText(focusSub.getComment());
+        }
+
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
 
+                boolean nameValid = true;
+                boolean dateValid = true;
+                boolean chargeValid = true;
+
                 setResult(RESULT_OK);
                 String name = nameText.getText().toString();
-                double charge = Double.parseDouble(chargeText.getText().toString());
-                String rawDate = dateText.getText().toString();
-                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                format.setLenient(false);
-                Date date = new Date();
-                try {
-                    date = format.parse(rawDate);
-                } catch(ParseException e) {
-                    e.printStackTrace();
-                    boolean valid = false;
+                if(name.isEmpty()) {
+                    nameValid = false;
                 }
+
+                String rawDate = dateText.getText().toString();
+                Date date = new Date();
+                if(!rawDate.isEmpty() && rawDate.length() == 10) {
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                    format.setLenient(false);
+                    try {
+                        date = format.parse(rawDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        dateValid = false;
+                    }
+                } else {
+                    dateValid = false;
+                }
+
+                String chargeString = chargeText.getText().toString();
+                double charge = 0;
+                if((!chargeString.isEmpty()) && (chargeString.indexOf(".") + 3 >= chargeString.length())) {
+                    charge = Double.parseDouble(chargeString);
+                }
+                else {
+                    chargeValid = false;
+                }
+
                 String comment = commentText.getText().toString();
 
                 Log.i(nameText.getText().toString(), chargeText.getText().toString());
                 Log.i(dateText.getText().toString(), commentText.getText().toString());
-                Subscription newSub = new Subscription(name, date, charge, comment);
-                subList.add(newSub);
+                if(dateValid && chargeValid && nameValid) {
 
-                saveInFile();
+                    Subscription newSub = new Subscription(name, date, charge, comment);
+                    if(focus == -1) {
+                        subList.add(newSub);
+                    } else {
+                        subList.set(focus, newSub);
 
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
+                    }
+
+                    saveInFile();
+
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+
+
+
 
 
             }
         });
 
+        Button delButton = (Button) findViewById(R.id.del_button);
+
+        delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!(focus == -1)) {
+
+                    subList.remove(focus);
+                    saveInFile();
+
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+
+                else {
+                    nameText.setText("");
+                    dateText.setText("");
+                    chargeText.setText("");
+                    commentText.setText("");
+                }
+            }
+        });
+
+
         Log.i("created", "created");
 
-        Intent intent = getIntent();
     }
 
     private void loadFromFile() {

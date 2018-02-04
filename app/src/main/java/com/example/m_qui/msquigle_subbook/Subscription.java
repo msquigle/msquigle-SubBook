@@ -73,8 +73,10 @@ public class Subscription {
 
     public String toString() {
 
-        String newString = this.name + "\t\t" + String.valueOf(this.charge) + "\n"
-                + date.toString() + "\n" + this.comment;
+        String dateString = date.toString().substring(4, 10) + date.toString().substring(23);
+
+        String newString = this.name + ": " + String.format(Locale.CANADA,"%.2f", this.charge) + "\n"
+                + dateString + "\n" + this.comment;
 
         return newString;
     }

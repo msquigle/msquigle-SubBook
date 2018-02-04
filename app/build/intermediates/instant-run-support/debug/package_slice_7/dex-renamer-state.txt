@@ -1,4 +1,4 @@
-#Sun Feb 04 12:53:20 MST 2018
-base.0=C\:\\Users\\m_qui\\Documents\\Android Projects\\msquigle-SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\7
+#Sun Feb 04 13:27:25 MST 2018
+base.0=C\:\\Users\\m_qui\\Documents\\Android Projects\\msquigle-SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\26
 path.0=classes.dex
 renamed.0=classes.dex

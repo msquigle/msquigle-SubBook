@@ -2,34 +2,67 @@
 <instant-run
     abi="x86"
     api-level="27"
-    build-mode="COLD"
+    build-mode="FULL"
     density="560dpi"
     format="10"
     plugin-version="3.0.1"
-    timestamp="1517774966353"
+    timestamp="1517776039438"
     token="-6226673686592076355"
-    verifier="FIELD_REMOVED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="1045" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="55" />
+        duration="0" />
     <task
         name="verifier"
-        duration="18" />
+        duration="0" />
 
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+        type="SPLIT" />
     <artifact
         location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
         type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\outputs\apk\debug\app-debug.apk"
+        type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1517770202288"
+        timestamp="1517776039438"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
@@ -67,40 +100,6 @@
         <artifact
             location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\outputs\apk\debug\app-debug.apk"
             type="SPLIT_MAIN" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1517773991670"
-        verifier="MANIFEST_FILE_CHANGE" >
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\outputs\apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1517774966353"
-        verifier="FIELD_REMOVED" >
-        <artifact
-            location="C:\Users\m_qui\Documents\Android Projects\msquigle-SubBook\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
-            type="SPLIT" />
     </build>
 
 </instant-run>

@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Feb 05 11:05:32 MST 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\m_qui\\Documents\\Android Projects\\msquigle-SubBook\\app\\build\\intermediates\\transforms\\dex\\release\\0
+0.path=classes.dex
+0.set=DEX
+count=1

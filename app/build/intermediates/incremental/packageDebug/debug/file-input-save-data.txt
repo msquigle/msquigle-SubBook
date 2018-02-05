@@ -1,7 +1,7 @@
 #Internal package file, do not edit.
-#Sun Feb 04 23:09:08 MST 2018
+#Mon Feb 05 00:50:33 MST 2018
 0.baseType=DIRECTORY
-0.base=C\:\\Users\\m_qui\\Documents\\Android Projects\\msquigle-SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\37
+0.base=C\:\\Users\\m_qui\\Documents\\Android Projects\\msquigle-SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\56
 0.path=classes.dex
 0.set=DEX
 count=1

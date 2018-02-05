@@ -2,9 +2,9 @@
     <string name="app_name">msquigle-SubBook</string>
     <string name="button_add">Add</string>
     <string name="button_save">Save</string>
-    <string name="name_hint">Enter Name of Charge</string>
+    <string name="name_hint">Enter Name of Subscription</string>
     <string name="date_hint">Enter Date Started: yyyy-mm-dd</string>
-    <string name="charge_hint">Enter the monthly cost</string>
+    <string name="charge_hint">Enter the Monthly Cost</string>
     <string name="comment_hint">Comments (optional)</string>
     <string name="total_costs">Total Monthly Cost: $0.00</string>
     <string name="delete">Delete</string>

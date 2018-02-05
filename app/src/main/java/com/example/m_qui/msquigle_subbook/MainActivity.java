@@ -1,3 +1,9 @@
+/*
+ * MainActivity
+ *
+ * Feb 2, 2018
+ */
+
 package com.example.m_qui.msquigle_subbook;
 
 import android.content.Context;
@@ -11,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,8 +34,27 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * @author Matthew Quigley
+ * @see Subscription
+ * @see AddSubscriptionActivity
+ */
 public class MainActivity extends AppCompatActivity {
-
+    /*
+     * Main screen of the app
+     * Displays all current subscriptions and
+     * provides access to the add/edit page
+     * Design: Three areas, a button that leads to
+     * the add/edit page. The view of all current subscriptions
+     * and finally the total of their costs at the bottom
+     * Maintains simplicity and cleanliness to not clutter
+     * and do what would be expected. Addition could
+     * be popup menu on itemlongclick to delete from there
+     * Issue: Sometimes after minor edits the json
+     * save file becomes unreadable giving only null
+     * object pointers when loading, needing to then
+     * wipe the data or change the file.
+     */
     public static final String EXTRA_MESSAGE = "com.example.m_qui.msquigle_subbook.MESSAGE";
     private static final String FILENAME = "subs.sav";
     private ListView subListView;
@@ -48,16 +74,20 @@ public class MainActivity extends AppCompatActivity {
         subListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                /*
+                 * When a subscription is clicked pass the index and change activities
+                 */
                 gotoAddActivity(view, i);
             }
         });
 
-        Button addButton = (Button) findViewById(R.id.add);
-
+        Button addButton = findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
+                 * Change to add/edit with index -1 to indicate no reference to subscription
+                 */
                 gotoAddActivity(view, -1);
             }
         });
@@ -65,35 +95,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStart() {
-
+        /*
+         * Initialize listView with subs and set total cost
+         */
         super.onStart();
-
         loadFromFile();
+
+        adapter = new ArrayAdapter<Subscription>(this, R.layout.sub_layout, subList);
+        subListView.setAdapter(adapter);
+
         double total = 0;
-        for(int i = 0; i < subList.size();i++) {
+
+        for (int i = 0; i < subList.size(); i++) {
             total = total + subList.get(i).getCharge();
         }
 
         String costDisplay = "Total Monthly Cost: $" + String.format(Locale.CANADA,"%.2f", total);
         costView.setText(costDisplay);
-
-        adapter = new ArrayAdapter<Subscription>(this, R.layout.sub_layout, subList);
-
-        subListView.setAdapter(adapter);
-
-
-    }
-
-    public void onResume() {
-        super.onResume();
-
-        adapter.notifyDataSetChanged();
-
-
     }
 
     public void gotoAddActivity(View view, int i) {
-
+        /*
+         * Change to the add/edit activity with the index of the subscription
+         */
         Intent intent = new Intent(this, AddSubscriptionActivity.class);
         String sending = String.valueOf(i);
         intent.putExtra(EXTRA_MESSAGE, sending);
@@ -102,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFromFile() {
+        //Load a given JSON file
 
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -112,33 +137,13 @@ public class MainActivity extends AppCompatActivity {
             // Taken https://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
             // 2018-01-23
             Type listType = new TypeToken<ArrayList<Subscription>>(){}.getType();
+
             subList = gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             subList = new ArrayList<Subscription>();
             Log.i("No File", "Created New File");
         } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-    }
-
-    private void saveInFile() {
-        try {
-
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    Context.MODE_PRIVATE);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-
-            Gson gson = new Gson();
-            gson.toJson(subList, out);
-            out.flush();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException();
         }
     }
